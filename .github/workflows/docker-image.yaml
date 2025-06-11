@@ -51,7 +51,7 @@ jobs:
         # Use docker manifest inspect. It returns a non-zero exit code if the manifest does not exist.
         # We use continue-on-error to prevent the workflow from failing if the image doesn't exist.
         run: |
-          docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/anki-sync-server:${{ steps.get_version.outputs.version }} > /dev/null 2>&1
+          docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/anki-syncserver:${{ steps.get_version.outputs.version }} > /dev/null 2>&1
         continue-on-error: true
 
       # Step 5: Log in to GitHub Container Registry (GHCR) if the image needs to be built
@@ -82,7 +82,7 @@ jobs:
         with:
           # Create image names for both Docker Hub and GHCR
           images: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/anki-sync-server
+            ${{ secrets.DOCKERHUB_USERNAME }}/anki-syncserver
             ghcr.io/${{ github.repository }}
           tags: |
             # Tag with the specific Anki version (e.g., 24.04.1)
